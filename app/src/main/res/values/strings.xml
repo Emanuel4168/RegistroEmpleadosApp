@@ -9,4 +9,8 @@
     <string name="btn_consult_text">Consult </string>
     <string name="btn_modify_text">modify </string>
     <string name="btn_delete_text">delete </string>
+
+    <string name="lbl_id_text">ID: </string>
+    <string name="lbl_name_text">Name: </string>
+    <string name="lbl_age_text">Age: </string>
 </resources>
