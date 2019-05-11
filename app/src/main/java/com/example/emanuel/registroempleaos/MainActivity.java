@@ -6,10 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.emanuel.registroempleaos.data_access.SQLiteConnection;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     EditText txtID,txtName,txtAge;
     Button btnSave,btnConsult;
+    SQLiteConnection bdConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnSave = (Button) findViewById(R.id.btnSave);
         btnConsult = (Button) findViewById(R.id.btnConsult);
+
+        bdConnection = new SQLiteConnection(this,"Employees",null,1);
     }
 
     @Override

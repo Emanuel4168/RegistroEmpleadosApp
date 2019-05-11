@@ -1,9 +1,15 @@
 package com.example.emanuel.registroempleaos.entities;
 
 public class Employee {
+    private int id;
     private int edad;
     private String name;
-    private String id;
+
+    public Employee(int edad, String name, int id) {
+        this.edad = edad;
+        this.name = name;
+        this.id = id;
+    }
 
     public int getEdad() {
         return edad;
@@ -21,11 +27,11 @@ public class Employee {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
