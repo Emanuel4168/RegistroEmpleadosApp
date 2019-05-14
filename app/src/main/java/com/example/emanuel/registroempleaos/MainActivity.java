@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnSave = (Button) findViewById(R.id.btnSave);
         btnConsult = (Button) findViewById(R.id.btnConsult);
+        btnSave.setOnClickListener(this);
+        btnConsult.setOnClickListener(this);
 
         bdConnection = new SQLiteConnection(this,"Employees",null,1);
     }
@@ -55,5 +57,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Long storeID = db.insert(DataBaseConstants.EMPLOYEE_TABLE,DataBaseConstants.ID_FIELD,values);
         Toast.makeText(getApplicationContext(),"ID de registro: "+storeID,Toast.LENGTH_LONG).show();
+        db.close();
+    }
+
+    private void putEmployeeBySQL(){
+        SQLiteDatabase db = bdConnection.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        String insert = "INSERT INTO "+DataBaseConstants.EMPLOYEE_TABLE+" ("+DataBaseConstants.ID_FIELD+","+DataBaseConstants.NAME_FIELD+","
+                        +DataBaseConstants.AGE_FIELD+") VALUES ("+txtID.getText().toString()+", '"+txtName.getText().toString()+"' ,"
+                        +txtAge.getText().toString()+")";
+        db.execSQL(insert);
+
+        db.close();
     }
 }
