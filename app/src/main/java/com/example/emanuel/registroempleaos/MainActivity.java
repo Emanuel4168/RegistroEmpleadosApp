@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSave = (Button) findViewById(R.id.btnSave);
         btnConsult = (Button) findViewById(R.id.btnConsult);
         btnModify = findViewById(R.id.btnModify);
-        btnConsult.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
+        btnModify.setOnClickListener(this);
         btnConsult.setOnClickListener(this);
 
         bdConnection = new SQLiteConnection(this,"Employees",null,1);
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(),"Algunos campos no son válidos",Toast.LENGTH_LONG).show();
                 return;
             }
-
+            modifyEmployee();
             return;
         }
         if(view == btnConsult){
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         db.update(DataBaseConstants.EMPLOYEE_TABLE,values,DataBaseConstants.ID_FIELD+"=?",parameters);
         Toast.makeText(getApplicationContext(),"Actualización correcta",Toast.LENGTH_LONG).show();
+        cleanForm();
         db.close();
     }
 
@@ -112,6 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean validateFields(){
-        return txtID.getText().length() < 1 || txtName.getText().length() < 10 || txtAge.getText().length() < 2;
+        return txtID.getText().length() > 1 && txtName.getText().length() > 10 && txtAge.getText().length() > 1;
     }
 }

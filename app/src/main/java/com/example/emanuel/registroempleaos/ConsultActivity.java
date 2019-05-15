@@ -1,5 +1,6 @@
 package com.example.emanuel.registroempleaos;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -41,15 +42,19 @@ public class ConsultActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         if(view == btnConsult){
-            if(txtID.getText().length() < 1){
-                Toast.makeText(getApplicationContext(),"El id parece no estar registrado",Toast.LENGTH_LONG).show();
+            if(!validateForm()){
+                Toast.makeText(getApplicationContext(),"Por favor, introduzca un ID",Toast.LENGTH_LONG).show();
                 return;
             }
             consult();
             return;
         }
         if(view == btnDelete){
-
+            if(!validateForm()){
+                Toast.makeText(getApplicationContext(),"Por favor, introduzca un ID",Toast.LENGTH_LONG).show();
+                return;
+            }
+            delete();
             return;
         }
     }
@@ -64,9 +69,9 @@ public class ConsultActivity extends AppCompatActivity implements View.OnClickLi
             Cursor cursor = db.query(DataBaseConstants.EMPLOYEE_TABLE,fields,DataBaseConstants.ID_FIELD+"=?",parameters,null,null,null);
             cursor.moveToFirst();
 
-            lbID.setText(lbID.getText()+" "+txtID.getText());
-            lbName.setText(lbName.getText()+" "+cursor.getString(0));
-            lbAge.setText(lbAge.getText()+" "+cursor.getString(1));
+            lbID.setText(getString(R.string.lbl_id_text)+" "+txtID.getText());
+            lbName.setText(getString(R.string.lbl_name_text)+" "+cursor.getString(0));
+            lbAge.setText(getString(R.string.lbl_age_text)+" "+cursor.getString(1));
             cleanForm();
 
         }catch (Exception e){
@@ -103,7 +108,21 @@ public class ConsultActivity extends AppCompatActivity implements View.OnClickLi
         db.close();
     }
 
+    private void delete(){
+        SQLiteDatabase db = bdConnection.getWritableDatabase();
+        String[] parameters = {txtID.getText().toString()};
+
+        db.delete(DataBaseConstants.EMPLOYEE_TABLE,DataBaseConstants.ID_FIELD+"=?",parameters);
+        Toast.makeText(getApplicationContext(),"Actualización correcta",Toast.LENGTH_LONG).show();
+        cleanForm();
+        db.close();
+    }
+
     private void cleanForm(){
         txtID.setText("");
+    }
+
+    private boolean validateForm(){
+        return txtID.getText().length() > 1;
     }
 }
