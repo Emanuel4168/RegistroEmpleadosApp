@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtID = (EditText) findViewById(R.id.txtID);
+        txtID = (EditText) findViewById(R.id.txtIDC);
         txtName = (EditText) findViewById(R.id.txtName);
         txtAge = (EditText) findViewById(R.id.txtAge);
 
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void putEmployeeBySQL(){
         SQLiteDatabase db = bdConnection.getWritableDatabase();
-        ContentValues values = new ContentValues();
 
         String insert = "INSERT INTO "+DataBaseConstants.EMPLOYEE_TABLE+" ("+DataBaseConstants.ID_FIELD+","+DataBaseConstants.NAME_FIELD+","
                         +DataBaseConstants.AGE_FIELD+") VALUES ("+txtID.getText().toString()+", '"+txtName.getText().toString()+"' ,"

@@ -7,7 +7,7 @@
     tools:context=".ConsultActivity">
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/txtIDC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="200dp"
         android:layout_marginEnd="172dp"
         android:layout_marginStart="172dp"
         android:layout_marginTop="16dp"
@@ -35,21 +35,21 @@
         app:layout_constraintVertical_bias="0.469">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/lbID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/lbl_id_text" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/lbName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/lbl_name_text" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/lbAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -66,7 +66,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4">
+        app:layout_constraintTop_toBottomOf="@+id/txtIDC">
 
         <Button
             android:id="@+id/btnConsult"
