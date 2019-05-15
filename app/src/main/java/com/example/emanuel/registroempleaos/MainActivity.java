@@ -1,6 +1,7 @@
 package com.example.emanuel.registroempleaos;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +15,10 @@ import com.example.emanuel.registroempleaos.utils.DataBaseConstants;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    EditText txtID,txtName,txtAge;
-    Button btnSave,btnConsult;
-    SQLiteConnection bdConnection;
+    private EditText txtID,txtName,txtAge;
+    private Button btnSave,btnConsult;
+    private SQLiteConnection bdConnection;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +40,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view == btnSave){
+            if(txtID.getText().length() < 1 || txtName.getText().length() < 10 || txtAge.getText().length() < 2){
+                Toast.makeText(getApplicationContext(),"Algunos campos no son válidos",Toast.LENGTH_LONG).show();
+                return;
+            }
             putEmployee();
+            cleanForm();
             return;
         }
         if(view == btnConsult){
-
+            openConsultActivity();
             return;
         }
     }
@@ -70,5 +77,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         db.execSQL(insert);
 
         db.close();
+    }
+
+    private void openConsultActivity(){
+        intent = new Intent(this, ConsultActivity.class);
+        startActivity(intent);
+    }
+
+    private void cleanForm(){
+        txtID.setText("");
+        txtName.setText("");
+        txtAge.setText("");
     }
 }
